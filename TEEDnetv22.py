@@ -280,7 +280,7 @@ class HAUnetv2(nn.Module):
                                 emb_channels=16, 
                                 output_channels=32,
                                 kernel_sizes_full = [60, 210, 360],
-                                kernel_sizes_mid = [120, 150, 240],
+                                kernel_sizes_mid = [60, 150, 240],
                                 kernel_sizes_tiny = [60, 90, 120]
                                 )
         
@@ -295,9 +295,9 @@ class HAUnetv2(nn.Module):
         self.x_down_3 = Downsampling(input_channels=64, 
                                 emb_channels=64, 
                                 output_channels=128,
-                                kernel_sizes_full = [15, 55, 90],
-                                kernel_sizes_mid = [15, 40, 60],
-                                kernel_sizes_tiny = [15, 25, 30]
+                                kernel_sizes_full = [15, 60, 90],
+                                kernel_sizes_mid = [15, 45, 60],
+                                kernel_sizes_tiny = [15, 20, 30]
                                 )
 
         self.x_neck = GRUBottleneck(Time = Time//8, Frequency= Frequency//8,hidden_size=64)
@@ -306,22 +306,22 @@ class HAUnetv2(nn.Module):
                                 emb_channels=128, 
                                 output_channels=128,
                                 kernel_sizes_full = [60, 210, 360],
-                                kernel_sizes_mid = [120, 210, 300],
-                                kernel_sizes_tiny = [180, 210, 240]
+                                kernel_sizes_mid = [60, 150, 240],
+                                kernel_sizes_tiny = [60, 90, 120]
                                 )
         self.x_up_2 = Upsampling(input_channels=128*3, 
                                 emb_channels=64, 
                                 output_channels=64,
                                 kernel_sizes_full = [30, 105, 180],
-                                kernel_sizes_mid = [60, 105, 150],
-                                kernel_sizes_tiny = [90, 105, 120]
+                                kernel_sizes_mid = [30, 75, 120],
+                                kernel_sizes_tiny = [30, 45, 60]
                                 )
         self.x_up_1 = Upsampling(input_channels=64*3, 
                                 emb_channels=32, 
                                 output_channels=32,
-                                kernel_sizes_full = [50, 150, 300],
-                                kernel_sizes_mid = [40, 80, 160],
-                                kernel_sizes_tiny = [30, 45, 60]
+                                kernel_sizes_full = [15, 60, 90],
+                                kernel_sizes_mid = [15, 45, 60],
+                                kernel_sizes_tiny = [15, 20, 30]
                                 )
         self.x_skip_1 = nn.Sequential(
             nn.Conv2d(3, 16, 5, padding=2),
